@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="./style.css">
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    </head>
+
+    <body>
+        <main class="container" id="app">
+            <div class="header-text-container">
+                <h1>HTML Symbols & Entities</h1>
+                <p>Currency Symbols, Currency Entities and ASCII Currency Character Code Reference</p>
+            </div>
+            <div class="list-items-group">
+
+                <div class="items-group" v-for="itm in 100">
+                    <div class="item">
+                        <div class="symbol"> © <span>Copyright Sign</span> </div>
+                        <div class="label"> <span class="label-name">UNICODE </span>  <pre>U+000A9</pre> <span class="copy-in">&#10064;</span> </div>
+                        <div class="label"> <span class="label-name">HEX CODE</span>  <pre><span>&</span>#xa9;</pre> <span class="copy-in">&#10064;</span> </div>
+                        <div class="label"> <span class="label-name">HTML CODE</span>  <pre><span>&</span>#169;</pre> <span class="copy-in">&#10064;</span> </div>
+                        <div class="label"> <span class="label-name">HTML ENTITY</span>  <pre><span>&</span>copy;</pre> <span class="copy-in">&#10064;</span> </div>
+                    </table>
+                </div>
+
+            </div>
+        </main>
+    </body>
+    <script>
+        const { createApp, ref, reactive } = Vue
+      
+        createApp({
+          setup() {
+            const message = ref('Hello vue!')
+            const myObject = reactive({
+                    title: 'How to do lists in Vue',
+                    author: 'Jane Doe',
+                    publishedAt: '2016-04-10'
+                }
+            )
+            return {
+              message,
+              myObject
+            }
+          }
+        }).mount('#app')
+      </script> 
+</html>
