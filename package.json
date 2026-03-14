@@ -1,0 +1,19 @@
+{
+  "name": "html-symbols-entities",
+  "version": "1.0.0",
+  "description": "Dynamic HTML Symbols & Entities reference with copy functionality",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "keywords": [
+    "html",
+    "entities",
+    "symbols",
+    "unicode",
+    "reference"
+  ],
+  "author": "",
+  "license": "MIT"
+}
