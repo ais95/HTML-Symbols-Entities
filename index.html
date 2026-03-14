@@ -1,48 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet" href="./style.css">
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Symbols & Entities - Copy & Reference</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
 
-    <body>
-        <main class="container" id="app">
+<body>
+    <main class="container" id="app">
+        <div class="header-section">
             <div class="header-text-container">
                 <h1>HTML Symbols & Entities</h1>
-                <p>Currency Symbols, Currency Entities and ASCII Currency Character Code Reference</p>
+                <p>Copy HTML entities, Unicode codes, and character references</p>
             </div>
-            <div class="list-items-group">
+            
+            <div class="search-container">
+                <input 
+                    v-model="searchQuery" 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="Search by name, unicode, or entity..."
+                >
+                <span class="result-count">{{ filteredEntities.length }} results</span>
+            </div>
+        </div>
 
-                <div class="items-group" v-for="itm in 100">
-                    <div class="item">
-                        <div class="symbol"> © <span>Copyright Sign</span> </div>
-                        <div class="label"> <span class="label-name">UNICODE </span>  <pre>U+000A9</pre> <span class="copy-in">&#10064;</span> </div>
-                        <div class="label"> <span class="label-name">HEX CODE</span>  <pre><span>&</span>#xa9;</pre> <span class="copy-in">&#10064;</span> </div>
-                        <div class="label"> <span class="label-name">HTML CODE</span>  <pre><span>&</span>#169;</pre> <span class="copy-in">&#10064;</span> </div>
-                        <div class="label"> <span class="label-name">HTML ENTITY</span>  <pre><span>&</span>copy;</pre> <span class="copy-in">&#10064;</span> </div>
-                    </table>
+        <div class="list-items-group">
+            <div v-if="filteredEntities.length === 0" class="no-results">
+                <p>No entities found. Try a different search.</p>
+            </div>
+            
+            <div v-for="entity in filteredEntities" :key="entity.id" class="items-group">
+                <div class="item">
+                    <div class="symbol">
+                        {{ entity.character }}
+                        <span>{{ entity.name }}</span>
+                    </div>
+                    
+                    <div class="code-section">
+                        <div class="label">
+                            <span class="label-name">UNICODE</span>
+                            <pre>{{ entity.unicode }}</pre>
+                            <span class="copy-btn" @click="copyToClipboard(entity.unicode, $event)" title="Copy Unicode">📋</span>
+                        </div>
+                        <div class="label">
+                            <span class="label-name">HEX</span>
+                            <pre>{{ entity.hex }}</pre>
+                            <span class="copy-btn" @click="copyToClipboard(entity.hex, $event)" title="Copy Hex">📋</span>
+                        </div>
+                        <div class="label">
+                            <span class="label-name">DECIMAL</span>
+                            <pre>{{ entity.decimal }}</pre>
+                            <span class="copy-btn" @click="copyToClipboard(entity.decimal, $event)" title="Copy Decimal">📋</span>
+                        </div>
+                        <div class="label" v-if="entity.htmlEntity">
+                            <span class="label-name">HTML</span>
+                            <pre>{{ entity.htmlEntity }}</pre>
+                            <span class="copy-btn" @click="copyToClipboard(entity.htmlEntity, $event)" title="Copy HTML">📋</span>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-        </main>
-    </body>
+        </div>
+
+        <div class="toast" v-if="copyNotification.visible" :class="copyNotification.type">
+            {{ copyNotification.message }}
+        </div>
+    </main>
+
     <script>
-        const { createApp, ref, reactive } = Vue
-      
+        const { createApp, ref, computed } = Vue;
+
+        // Comprehensive HTML entities data
+        const entities = [
+            { id: 1, character: '©', name: 'Copyright Sign', unicode: 'U+000A9', hex: '&#xa9;', decimal: '&#169;', htmlEntity: '&copy;' },
+            { id: 2, character: '®', name: 'Registered Trademark', unicode: 'U+000AE', hex: '&#xae;', decimal: '&#174;', htmlEntity: '&reg;' },
+            { id: 3, character: '™', name: 'Trademark Sign', unicode: 'U+2122', hex: '&#x2122;', decimal: '&#8482;', htmlEntity: '&trade;' },
+            { id: 4, character: '€', name: 'Euro Sign', unicode: 'U+20AC', hex: '&#x20ac;', decimal: '&#8364;', htmlEntity: '&euro;' },
+            { id: 5, character: '£', name: 'Pound Sign', unicode: 'U+000A3', hex: '&#xa3;', decimal: '&#163;', htmlEntity: '&pound;' },
+            { id: 6, character: '¥', name: 'Yen Sign', unicode: 'U+000A5', hex: '&#xa5;', decimal: '&#165;', htmlEntity: '&yen;' },
+            { id: 7, character: '¢', name: 'Cent Sign', unicode: 'U+000A2', hex: '&#xa2;', decimal: '&#162;', htmlEntity: '&cent;' },
+            { id: 8, character: '§', name: 'Section Sign', unicode: 'U+000A7', hex: '&#xa7;', decimal: '&#167;', htmlEntity: '&sect;' },
+            { id: 9, character: '¶', name: 'Pilcrow', unicode: 'U+000B6', hex: '&#xb6;', decimal: '&#182;', htmlEntity: '&para;' },
+            { id: 10, character: '†', name: 'Dagger', unicode: 'U+2020', hex: '&#x2020;', decimal: '&#8224;', htmlEntity: '&dagger;' },
+            { id: 11, character: '‡', name: 'Double Dagger', unicode: 'U+2021', hex: '&#x2021;', decimal: '&#8225;', htmlEntity: '&Dagger;' },
+            { id: 12, character: '•', name: 'Bullet', unicode: 'U+2022', hex: '&#x2022;', decimal: '&#8226;', htmlEntity: '&bull;' },
+            { id: 13, character: '°', name: 'Degree Sign', unicode: 'U+000B0', hex: '&#xb0;', decimal: '&#176;', htmlEntity: '&deg;' },
+            { id: 14, character: '‰', name: 'Per Mille Sign', unicode: 'U+2030', hex: '&#x2030;', decimal: '&#8240;', htmlEntity: '&permil;' },
+            { id: 15, character: '′', name: 'Prime', unicode: 'U+2032', hex: '&#x2032;', decimal: '&#8242;', htmlEntity: '&prime;' },
+            { id: 16, character: '″', name: 'Double Prime', unicode: 'U+2033', hex: '&#x2033;', decimal: '&#8243;', htmlEntity: '&Prime;' },
+            { id: 17, character: '‹', name: 'Single Left-Pointing Angle Quotation Mark', unicode: 'U+2039', hex: '&#x2039;', decimal: '&#8249;', htmlEntity: '&lsaquo;' },
+            { id: 18, character: '›', name: 'Single Right-Pointing Angle Quotation Mark', unicode: 'U+203A', hex: '&#x203a;', decimal: '&#8250;', htmlEntity: '&rsaquo;' },
+            { id: 19, character: '«', name: 'Left-Pointing Double Angle Quotation Mark', unicode: 'U+000AB', hex: '&#xab;', decimal: '&#171;', htmlEntity: '&laquo;' },
+            { id: 20, character: '»', name: 'Right-Pointing Double Angle Quotation Mark', unicode: 'U+000BB', hex: '&#xbb;', decimal: '&#187;', htmlEntity: '&raquo;' },
+            { id: 21, character: '←', name: 'Leftwards Arrow', unicode: 'U+2190', hex: '&#x2190;', decimal: '&#8592;', htmlEntity: '&larr;' },
+            { id: 22, character: '→', name: 'Rightwards Arrow', unicode: 'U+2192', hex: '&#x2192;', decimal: '&#8594;', htmlEntity: '&rarr;' },
+            { id: 23, character: '↑', name: 'Upwards Arrow', unicode: 'U+2191', hex: '&#x2191;', decimal: '&#8593;', htmlEntity: '&uarr;' },
+            { id: 24, character: '↓', name: 'Downwards Arrow', unicode: 'U+2193', hex: '&#x2193;', decimal: '&#8595;', htmlEntity: '&darr;' },
+            { id: 25, character: '↔', name: 'Left Right Arrow', unicode: 'U+2194', hex: '&#x2194;', decimal: '&#8596;', htmlEntity: '&harr;' },
+            { id: 26, character: '⇐', name: 'Leftwards Double Arrow', unicode: 'U+21D0', hex: '&#x21d0;', decimal: '&#8656;', htmlEntity: '&lArr;' },
+            { id: 27, character: '⇒', name: 'Rightwards Double Arrow', unicode: 'U+21D2', hex: '&#x21d2;', decimal: '&#8658;', htmlEntity: '&rArr;' },
+            { id: 28, character: '⇑', name: 'Upwards Double Arrow', unicode: 'U+21D1', hex: '&#x21d1;', decimal: '&#8657;', htmlEntity: '&uArr;' },
+            { id: 29, character: '⇓', name: 'Downwards Double Arrow', unicode: 'U+21D3', hex: '&#x21d3;', decimal: '&#8659;', htmlEntity: '&dArr;' },
+            { id: 30, character: '↕', name: 'Up Down Arrow', unicode: 'U+2195', hex: '&#x2195;', decimal: '&#8597;', htmlEntity: '&varr;' },
+            { id: 31, character: '∀', name: 'For All', unicode: 'U+2200', hex: '&#x2200;', decimal: '&#8704;', htmlEntity: '&forall;' },
+            { id: 32, character: '∂', name: 'Partial Differential', unicode: 'U+2202', hex: '&#x2202;', decimal: '&#8706;', htmlEntity: '&part;' },
+            { id: 33, character: '∃', name: 'There Exists', unicode: 'U+2203', hex: '&#x2203;', decimal: '&#8707;', htmlEntity: '&exist;' },
+            { id: 34, character: '∄', name: 'There Does Not Exist', unicode: 'U+2204', hex: '&#x2204;', decimal: '&#8708;', htmlEntity: '&nexist;' },
+            { id: 35, character: '∅', name: 'Empty Set', unicode: 'U+2205', hex: '&#x2205;', decimal: '&#8709;', htmlEntity: '&empty;' },
+            { id: 36, character: '∆', name: 'Increment', unicode: 'U+2206', hex: '&#x2206;', decimal: '&#8710;', htmlEntity: '&Delta;' },
+            { id: 37, character: '∇', name: 'Nabla', unicode: 'U+2207', hex: '&#x2207;', decimal: '&#8711;', htmlEntity: '&nabla;' },
+            { id: 38, character: '∈', name: 'Element Of', unicode: 'U+2208', hex: '&#x2208;', decimal: '&#8712;', htmlEntity: '&isin;' },
+            { id: 39, character: '∉', name: 'Not An Element Of', unicode: 'U+2209', hex: '&#x2209;', decimal: '&#8713;', htmlEntity: '&notin;' },
+            { id: 40, character: '∊', name: 'Small Element Of', unicode: 'U+220A', hex: '&#x220a;', decimal: '&#8714;', htmlEntity: '&smallin;' },
+            { id: 41, character: '∋', name: 'Contains As Member', unicode: 'U+220B', hex: '&#x220b;', decimal: '&#8715;', htmlEntity: '&ni;' },
+            { id: 42, character: '∏', name: 'N-Ary Product', unicode: 'U+220F', hex: '&#x220f;', decimal: '&#8719;', htmlEntity: '&prod;' },
+            { id: 43, character: '∑', name: 'N-Ary Summation', unicode: 'U+2211', hex: '&#x2211;', decimal: '&#8721;', htmlEntity: '&sum;' },
+            { id: 44, character: '−', name: 'Minus Sign', unicode: 'U+2212', hex: '&#x2212;', decimal: '&#8722;', htmlEntity: '&minus;' },
+            { id: 45, character: '∗', name: 'Asterisk Operator', unicode: 'U+2217', hex: '&#x2217;', decimal: '&#8727;', htmlEntity: '&lowast;' },
+            { id: 46, character: '√', name: 'Square Root', unicode: 'U+221A', hex: '&#x221a;', decimal: '&#8730;', htmlEntity: '&radic;' },
+            { id: 47, character: '∝', name: 'Proportional To', unicode: 'U+221D', hex: '&#x221d;', decimal: '&#8733;', htmlEntity: '&prop;' },
+            { id: 48, character: '∞', name: 'Infinity', unicode: 'U+221E', hex: '&#x221e;', decimal: '&#8734;', htmlEntity: '&infin;' },
+            { id: 49, character: '∠', name: 'Angle', unicode: 'U+2220', hex: '&#x2220;', decimal: '&#8736;', htmlEntity: '&ang;' },
+            { id: 50, character: '∧', name: 'Logical And', unicode: 'U+2227', hex: '&#x2227;', decimal: '&#8743;', htmlEntity: '&and;' },
+            { id: 51, character: '∨', name: 'Logical Or', unicode: 'U+2228', hex: '&#x2228;', decimal: '&#8744;', htmlEntity: '&or;' },
+            { id: 52, character: '∩', name: 'Intersection', unicode: 'U+2229', hex: '&#x2229;', decimal: '&#8745;', htmlEntity: '&cap;' },
+            { id: 53, character: '∪', name: 'Union', unicode: 'U+222A', hex: '&#x222a;', decimal: '&#8746;', htmlEntity: '&cup;' },
+            { id: 54, character: '∫', name: 'Integral', unicode: 'U+222B', hex: '&#x222b;', decimal: '&#8747;', htmlEntity: '&int;' },
+            { id: 55, character: '∴', name: 'Therefore', unicode: 'U+2234', hex: '&#x2234;', decimal: '&#8756;', htmlEntity: '&there4;' },
+            { id: 56, character: '∼', name: 'Tilde Operator', unicode: 'U+223C', hex: '&#x223c;', decimal: '&#8764;', htmlEntity: '&sim;' },
+            { id: 57, character: '≅', name: 'Approximately Equal To', unicode: 'U+2245', hex: '&#x2245;', decimal: '&#8773;', htmlEntity: '&cong;' },
+            { id: 58, character: '≈', name: 'Almost Equal To', unicode: 'U+2248', hex: '&#x2248;', decimal: '&#8776;', htmlEntity: '&asymp;' },
+            { id: 59, character: '≠', name: 'Not Equal To', unicode: 'U+2260', hex: '&#x2260;', decimal: '&#8800;', htmlEntity: '&ne;' },
+            { id: 60, character: '≡', name: 'Identical To', unicode: 'U+2261', hex: '&#x2261;', decimal: '&#8801;', htmlEntity: '&equiv;' },
+            { id: 61, character: '≤', name: 'Less-Than Or Equal To', unicode: 'U+2264', hex: '&#x2264;', decimal: '&#8804;', htmlEntity: '&le;' },
+            { id: 62, character: '≥', name: 'Greater-Than Or Equal To', unicode: 'U+2265', hex: '&#x2265;', decimal: '&#8805;', htmlEntity: '&ge;' },
+            { id: 63, character: '⊂', name: 'Subset Of', unicode: 'U+2282', hex: '&#x2282;', decimal: '&#8834;', htmlEntity: '&sub;' },
+            { id: 64, character: '⊃', name: 'Superset Of', unicode: 'U+2283', hex: '&#x2283;', decimal: '&#8835;', htmlEntity: '&sup;' },
+            { id: 65, character: '⊄', name: 'Not A Subset Of', unicode: 'U+2284', hex: '&#x2284;', decimal: '&#8836;', htmlEntity: '&nsub;' },
+            { id: 66, character: '⊆', name: 'Subset Of Or Equal To', unicode: 'U+2286', hex: '&#x2286;', decimal: '&#8838;', htmlEntity: '&sube;' },
+            { id: 67, character: '⊇', name: 'Superset Of Or Equal To', unicode: 'U+2287', hex: '&#x2287;', decimal: '&#8839;', htmlEntity: '&supe;' },
+            { id: 68, character: '⊕', name: 'Circled Plus', unicode: 'U+2295', hex: '&#x2295;', decimal: '&#8853;', htmlEntity: '&oplus;' },
+            { id: 69, character: '⊗', name: 'Circled Times', unicode: 'U+2297', hex: '&#x2297;', decimal: '&#8855;', htmlEntity: '&otimes;' },
+            { id: 70, character: '⊥', name: 'Up Tack', unicode: 'U+22A5', hex: '&#x22a5;', decimal: '&#8869;', htmlEntity: '&perp;' },
+            { id: 71, character: '⋅', name: 'Dot Operator', unicode: 'U+22C5', hex: '&#x22c5;', decimal: '&#8901;', htmlEntity: '&sdot;' },
+            { id: 72, character: '◊', name: 'Lozenge', unicode: 'U+25CA', hex: '&#x25ca;', decimal: '&#9674;', htmlEntity: '&loz;' },
+            { id: 73, character: '♠', name: 'Spade Suit', unicode: 'U+2660', hex: '&#x2660;', decimal: '&#9824;', htmlEntity: '&spades;' },
+            { id: 74, character: '♣', name: 'Club Suit', unicode: 'U+2663', hex: '&#x2663;', decimal: '&#9827;', htmlEntity: '&clubs;' },
+            { id: 75, character: '♥', name: 'Heart Suit', unicode: 'U+2665', hex: '&#x2665;', decimal: '&#9829;', htmlEntity: '&hearts;' },
+            { id: 76, character: '♦', name: 'Diamond Suit', unicode: 'U+2666', hex: '&#x2666;', decimal: '&#9830;', htmlEntity: '&diams;' },
+            { id: 77, character: '‚', name: 'Single Low-9 Quotation Mark', unicode: 'U+2018', hex: '&#x2018;', decimal: '&#8216;', htmlEntity: '&lsquo;' },
+            { id: 78, character: ''', name: 'Right Single Quotation Mark', unicode: 'U+2019', hex: '&#x2019;', decimal: '&#8217;', htmlEntity: '&rsquo;' },
+            { id: 79, character: '"', name: 'Left Double Quotation Mark', unicode: 'U+201C', hex: '&#x201c;', decimal: '&#8220;', htmlEntity: '&ldquo;' },
+            { id: 80, character: '"', name: 'Right Double Quotation Mark', unicode: 'U+201D', hex: '&#x201d;', decimal: '&#8221;', htmlEntity: '&rdquo;' },
+        ];
+
         createApp({
-          setup() {
-            const message = ref('Hello vue!')
-            const myObject = reactive({
-                    title: 'How to do lists in Vue',
-                    author: 'Jane Doe',
-                    publishedAt: '2016-04-10'
-                }
-            )
-            return {
-              message,
-              myObject
+            setup() {
+                const searchQuery = ref('');
+                const copyNotification = ref({ visible: false, message: '', type: '' });
+
+                const filteredEntities = computed(() => {
+                    if (!searchQuery.value) return entities;
+                    
+                    const query = searchQuery.value.toLowerCase();
+                    return entities.filter(entity => 
+                        entity.name.toLowerCase().includes(query) ||
+                        entity.unicode.toLowerCase().includes(query) ||
+                        entity.htmlEntity.toLowerCase().includes(query) ||
+                        entity.decimal.toLowerCase().includes(query) ||
+                        entity.hex.toLowerCase().includes(query)
+                    );
+                });
+
+                const copyToClipboard = async (text, event) => {
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        copyNotification.value = { visible: true, message: '✓ Copied!', type: 'success' };
+                        setTimeout(() => {
+                            copyNotification.value.visible = false;
+                        }, 1500);
+                    } catch (err) {
+                        copyNotification.value = { visible: true, message: '✗ Copy failed', type: 'error' };
+                        setTimeout(() => {
+                            copyNotification.value.visible = false;
+                        }, 1500);
+                    }
+                };
+
+                return {
+                    searchQuery,
+                    filteredEntities,
+                    copyToClipboard,
+                    copyNotification
+                };
             }
-          }
-        }).mount('#app')
-      </script> 
+        }).mount('#app');
+    </script>
+</body>
 </html>
