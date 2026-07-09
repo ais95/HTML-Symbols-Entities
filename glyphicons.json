@@ -1,0 +1,579 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "CSS Glyphicons icon font collection with comprehensive symbol database",
+    "source": "Bootstrap Glyphicons",
+    "totalGlyphicons": 250,
+    "features": [
+      "Font-based icons for web applications",
+      "Scalable vector graphics",
+      "Single font file delivery",
+      "CSS class-based implementation",
+      "Customizable size and color",
+      "Accessibility support",
+      "Cross-browser compatibility",
+      "Lightweight alternative to image sprites",
+      "Easy animation support",
+      "CSS-only styling"
+    ]
+  },
+  "glyphicons": [
+    {
+      "id": 1,
+      "name": "asterisk",
+      "className": "glyphicon-asterisk",
+      "unicode": "U+002A",
+      "htmlEntity": "&#42;",
+      "category": "general",
+      "description": "Asterisk symbol"
+    },
+    {
+      "id": 2,
+      "name": "plus",
+      "className": "glyphicon-plus",
+      "unicode": "U+002B",
+      "htmlEntity": "&#43;",
+      "category": "arrows",
+      "description": "Plus sign for add/expand"
+    },
+    {
+      "id": 3,
+      "name": "minus",
+      "className": "glyphicon-minus",
+      "unicode": "U+2212",
+      "htmlEntity": "&#8722;",
+      "category": "arrows",
+      "description": "Minus sign for remove/collapse"
+    },
+    {
+      "id": 4,
+      "name": "cloud",
+      "className": "glyphicon-cloud",
+      "unicode": "U+2601",
+      "htmlEntity": "&#9729;",
+      "category": "weather",
+      "description": "Cloud symbol"
+    },
+    {
+      "id": 5,
+      "name": "heart",
+      "className": "glyphicon-heart",
+      "unicode": "U+2665",
+      "htmlEntity": "&#9829;",
+      "category": "emoji",
+      "description": "Heart symbol for favorites"
+    },
+    {
+      "id": 6,
+      "name": "star",
+      "className": "glyphicon-star",
+      "unicode": "U+2605",
+      "htmlEntity": "&#9733;",
+      "category": "rating",
+      "description": "Filled star for rating"
+    },
+    {
+      "id": 7,
+      "name": "star-empty",
+      "className": "glyphicon-star-empty",
+      "unicode": "U+2606",
+      "htmlEntity": "&#9734;",
+      "category": "rating",
+      "description": "Empty star for rating"
+    },
+    {
+      "id": 8,
+      "name": "home",
+      "className": "glyphicon-home",
+      "unicode": "U+2302",
+      "htmlEntity": "&#8962;",
+      "category": "navigation",
+      "description": "House icon for home"
+    },
+    {
+      "id": 9,
+      "name": "file",
+      "className": "glyphicon-file",
+      "unicode": "U+1F4C4",
+      "htmlEntity": "&#128196;",
+      "category": "files",
+      "description": "Document file icon"
+    },
+    {
+      "id": 10,
+      "name": "folder",
+      "className": "glyphicon-folder",
+      "unicode": "U+1F4C1",
+      "htmlEntity": "&#128193;",
+      "category": "files",
+      "description": "Folder icon"
+    },
+    {
+      "id": 11,
+      "name": "folder-open",
+      "className": "glyphicon-folder-open",
+      "unicode": "U+1F4C2",
+      "htmlEntity": "&#128194;",
+      "category": "files",
+      "description": "Open folder icon"
+    },
+    {
+      "id": 12,
+      "name": "download-alt",
+      "className": "glyphicon-download-alt",
+      "unicode": "U+2B07",
+      "htmlEntity": "&#11015;",
+      "category": "actions",
+      "description": "Download arrow"
+    },
+    {
+      "id": 13,
+      "name": "upload",
+      "className": "glyphicon-upload",
+      "unicode": "U+2B06",
+      "htmlEntity": "&#11014;",
+      "category": "actions",
+      "description": "Upload arrow"
+    },
+    {
+      "id": 14,
+      "name": "inbox",
+      "className": "glyphicon-inbox",
+      "unicode": "U+1F4E5",
+      "htmlEntity": "&#128229;",
+      "category": "mail",
+      "description": "Inbox tray"
+    },
+    {
+      "id": 15,
+      "name": "play",
+      "className": "glyphicon-play",
+      "unicode": "U+25B6",
+      "htmlEntity": "&#9654;",
+      "category": "media",
+      "description": "Play button"
+    },
+    {
+      "id": 16,
+      "name": "pause",
+      "className": "glyphicon-pause",
+      "unicode": "U+23F8",
+      "htmlEntity": "&#9208;",
+      "category": "media",
+      "description": "Pause button"
+    },
+    {
+      "id": 17,
+      "name": "stop",
+      "className": "glyphicon-stop",
+      "unicode": "U+23F9",
+      "htmlEntity": "&#9209;",
+      "category": "media",
+      "description": "Stop button"
+    },
+    {
+      "id": 18,
+      "name": "backward",
+      "className": "glyphicon-backward",
+      "unicode": "U+23EE",
+      "htmlEntity": "&#9198;",
+      "category": "media",
+      "description": "Backward/Previous"
+    },
+    {
+      "id": 19,
+      "name": "forward",
+      "className": "glyphicon-forward",
+      "unicode": "U+23ED",
+      "htmlEntity": "&#9197;",
+      "category": "media",
+      "description": "Forward/Next"
+    },
+    {
+      "id": 20,
+      "name": "fast-backward",
+      "className": "glyphicon-fast-backward",
+      "unicode": "U+23EE",
+      "htmlEntity": "&#9198;",
+      "category": "media",
+      "description": "Fast backward"
+    },
+    {
+      "id": 21,
+      "name": "fast-forward",
+      "className": "glyphicon-fast-forward",
+      "unicode": "U+23ED",
+      "htmlEntity": "&#9197;",
+      "category": "media",
+      "description": "Fast forward"
+    },
+    {
+      "id": 22,
+      "name": "volume-off",
+      "className": "glyphicon-volume-off",
+      "unicode": "U+1F507",
+      "htmlEntity": "&#128263;",
+      "category": "media",
+      "description": "Muted speaker"
+    },
+    {
+      "id": 23,
+      "name": "volume-down",
+      "className": "glyphicon-volume-down",
+      "unicode": "U+1F508",
+      "htmlEntity": "&#128264;",
+      "category": "media",
+      "description": "Speaker with low volume"
+    },
+    {
+      "id": 24,
+      "name": "volume-up",
+      "className": "glyphicon-volume-up",
+      "unicode": "U+1F50A",
+      "htmlEntity": "&#128266;",
+      "category": "media",
+      "description": "Speaker with high volume"
+    },
+    {
+      "id": 25,
+      "name": "record",
+      "className": "glyphicon-record",
+      "unicode": "U+25CF",
+      "htmlEntity": "&#9679;",
+      "category": "media",
+      "description": "Record button"
+    },
+    {
+      "id": 26,
+      "name": "search",
+      "className": "glyphicon-search",
+      "unicode": "U+1F50D",
+      "htmlEntity": "&#128269;",
+      "category": "actions",
+      "description": "Search/magnifying glass"
+    },
+    {
+      "id": 27,
+      "name": "trash",
+      "className": "glyphicon-trash",
+      "unicode": "U+1F5D1",
+      "htmlEntity": "&#128465;",
+      "category": "actions",
+      "description": "Delete/trash bin"
+    },
+    {
+      "id": 28,
+      "name": "remove",
+      "className": "glyphicon-remove",
+      "unicode": "U+2717",
+      "htmlEntity": "&#10007;",
+      "category": "actions",
+      "description": "Remove/close"
+    },
+    {
+      "id": 29,
+      "name": "ok",
+      "className": "glyphicon-ok",
+      "unicode": "U+2713",
+      "htmlEntity": "&#10003;",
+      "category": "actions",
+      "description": "Checkmark/confirm"
+    },
+    {
+      "id": 30,
+      "name": "zoom-in",
+      "className": "glyphicon-zoom-in",
+      "unicode": "U+1F50D",
+      "htmlEntity": "&#128269;",
+      "category": "actions",
+      "description": "Zoom in"
+    },
+    {
+      "id": 31,
+      "name": "zoom-out",
+      "className": "glyphicon-zoom-out",
+      "unicode": "U+1F50D",
+      "htmlEntity": "&#128269;",
+      "category": "actions",
+      "description": "Zoom out"
+    },
+    {
+      "id": 32,
+      "name": "settings",
+      "className": "glyphicon-cog",
+      "unicode": "U+2699",
+      "htmlEntity": "&#9881;",
+      "category": "actions",
+      "description": "Settings/gear icon"
+    },
+    {
+      "id": 33,
+      "name": "wrench",
+      "className": "glyphicon-wrench",
+      "unicode": "U+1F527",
+      "htmlEntity": "&#128295;",
+      "category": "actions",
+      "description": "Tool/wrench"
+    },
+    {
+      "id": 34,
+      "name": "user",
+      "className": "glyphicon-user",
+      "unicode": "U+1F464",
+      "htmlEntity": "&#128100;",
+      "category": "people",
+      "description": "User profile"
+    },
+    {
+      "id": 35,
+      "name": "users",
+      "className": "glyphicon-users",
+      "unicode": "U+1F465",
+      "htmlEntity": "&#128101;",
+      "category": "people",
+      "description": "Multiple users/group"
+    },
+    {
+      "id": 36,
+      "name": "comment",
+      "className": "glyphicon-comment",
+      "unicode": "U+1F4AC",
+      "htmlEntity": "&#128172;",
+      "category": "chat",
+      "description": "Comment bubble"
+    },
+    {
+      "id": 37,
+      "name": "comments",
+      "className": "glyphicon-comments",
+      "unicode": "U+1F4AD",
+      "htmlEntity": "&#128173;",
+      "category": "chat",
+      "description": "Multiple comment bubbles"
+    },
+    {
+      "id": 38,
+      "name": "envelope",
+      "className": "glyphicon-envelope",
+      "unicode": "U+1F4E8",
+      "htmlEntity": "&#128232;",
+      "category": "mail",
+      "description": "Email envelope"
+    },
+    {
+      "id": 39,
+      "name": "calendar",
+      "className": "glyphicon-calendar",
+      "unicode": "U+1F4C5",
+      "htmlEntity": "&#128197;",
+      "category": "time",
+      "description": "Calendar"
+    },
+    {
+      "id": 40,
+      "name": "clock",
+      "className": "glyphicon-time",
+      "unicode": "U+1F550",
+      "htmlEntity": "&#128336;",
+      "category": "time",
+      "description": "Clock/time"
+    },
+    {
+      "id": 41,
+      "name": "bell",
+      "className": "glyphicon-bell",
+      "unicode": "U+1F514",
+      "htmlEntity": "&#128276;",
+      "category": "notifications",
+      "description": "Bell/notification"
+    },
+    {
+      "id": 42,
+      "name": "info",
+      "className": "glyphicon-info-sign",
+      "unicode": "U+2139",
+      "htmlEntity": "&#8505;",
+      "category": "alerts",
+      "description": "Information icon"
+    },
+    {
+      "id": 43,
+      "name": "warning",
+      "className": "glyphicon-warning-sign",
+      "unicode": "U+26A0",
+      "htmlEntity": "&#9888;",
+      "category": "alerts",
+      "description": "Warning sign"
+    },
+    {
+      "id": 44,
+      "name": "question",
+      "className": "glyphicon-question-sign",
+      "unicode": "U+003F",
+      "htmlEntity": "&#63;",
+      "category": "alerts",
+      "description": "Question mark"
+    },
+    {
+      "id": 45,
+      "name": "exclamation",
+      "className": "glyphicon-exclamation-sign",
+      "unicode": "U+0021",
+      "htmlEntity": "&#33;",
+      "category": "alerts",
+      "description": "Exclamation mark"
+    },
+    {
+      "id": 46,
+      "name": "link",
+      "className": "glyphicon-link",
+      "unicode": "U+1F517",
+      "htmlEntity": "&#128279;",
+      "category": "navigation",
+      "description": "Link/chain"
+    },
+    {
+      "id": 47,
+      "name": "pencil",
+      "className": "glyphicon-pencil",
+      "unicode": "U+270D",
+      "htmlEntity": "&#9997;",
+      "category": "edit",
+      "description": "Edit/pencil"
+    },
+    {
+      "id": 48,
+      "name": "share",
+      "className": "glyphicon-share",
+      "unicode": "U+1F517",
+      "htmlEntity": "&#128279;",
+      "category": "social",
+      "description": "Share icon"
+    },
+    {
+      "id": 49,
+      "name": "bookmark",
+      "className": "glyphicon-bookmark",
+      "unicode": "U+1F4D1",
+      "htmlEntity": "&#128209;",
+      "category": "actions",
+      "description": "Bookmark"
+    },
+    {
+      "id": 50,
+      "name": "flag",
+      "className": "glyphicon-flag",
+      "unicode": "U+1F6A9",
+      "htmlEntity": "&#128681;",
+      "category": "notifications",
+      "description": "Flag"
+    }
+  ],
+  "categories": {
+    "general": {
+      "count": 1,
+      "description": "General purpose icons",
+      "icons": ["asterisk"]
+    },
+    "arrows": {
+      "count": 2,
+      "description": "Directional arrow icons",
+      "icons": ["plus", "minus"]
+    },
+    "weather": {
+      "count": 1,
+      "description": "Weather-related icons",
+      "icons": ["cloud"]
+    },
+    "emoji": {
+      "count": 1,
+      "description": "Emoji-style icons",
+      "icons": ["heart"]
+    },
+    "rating": {
+      "count": 2,
+      "description": "Rating and feedback icons",
+      "icons": ["star", "star-empty"]
+    },
+    "navigation": {
+      "count": 2,
+      "description": "Navigation and browsing icons",
+      "icons": ["home", "link"]
+    },
+    "files": {
+      "count": 3,
+      "description": "File and folder management icons",
+      "icons": ["file", "folder", "folder-open"]
+    },
+    "actions": {
+      "count": 10,
+      "description": "Common action icons",
+      "icons": ["download-alt", "upload", "search", "trash", "remove", "ok", "zoom-in", "zoom-out", "settings", "bookmark"]
+    },
+    "media": {
+      "count": 12,
+      "description": "Audio/video playback controls",
+      "icons": ["play", "pause", "stop", "backward", "forward", "fast-backward", "fast-forward", "volume-off", "volume-down", "volume-up", "record"]
+    },
+    "mail": {
+      "count": 2,
+      "description": "Email and messaging icons",
+      "icons": ["inbox", "envelope"]
+    },
+    "edit": {
+      "count": 1,
+      "description": "Editing tools",
+      "icons": ["pencil"]
+    },
+    "people": {
+      "count": 2,
+      "description": "User and group icons",
+      "icons": ["user", "users"]
+    },
+    "chat": {
+      "count": 2,
+      "description": "Communication and chat icons",
+      "icons": ["comment", "comments"]
+    },
+    "time": {
+      "count": 2,
+      "description": "Date and time icons",
+      "icons": ["calendar", "clock"]
+    },
+    "notifications": {
+      "count": 2,
+      "description": "Alert and notification icons",
+      "icons": ["bell", "flag"]
+    },
+    "alerts": {
+      "count": 4,
+      "description": "Alert and status indicators",
+      "icons": ["info", "warning", "question", "exclamation"]
+    },
+    "social": {
+      "count": 1,
+      "description": "Social sharing icons",
+      "icons": ["share"]
+    }
+  },
+  "cssImplementation": {
+    "fontFamily": "Glyphicons Halflings",
+    "baseClass": "glyphicon",
+    "usage": "<span class=\"glyphicon glyphicon-{name}\"></span>",
+    "styling": {
+      "sizeSmall": "font-size: 12px;",
+      "sizeMedium": "font-size: 18px;",
+      "sizeLarge": "font-size: 24px;",
+      "sizeXL": "font-size: 32px;",
+      "color": "color: #333;",
+      "colorPrimary": "color: #007bff;",
+      "colorSuccess": "color: #28a745;",
+      "colorDanger": "color: #dc3545;",
+      "colorWarning": "color: #ffc107;",
+      "colorInfo": "color: #17a2b8;",
+      "animation": "animation: spin 2s linear infinite;",
+      "opacity": "opacity: 0.5;",
+      "rotate": "transform: rotate(90deg);"
+    }
+  }
+}
